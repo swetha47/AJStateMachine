@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "AJStateMachine",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "A starter project for creating a state machine in AngularJS",
+  "repository": "https://github.com/swetha47/AJStateMachine.git",
   "license": "MIT",
   "dependencies": {
     "angular": "^1.7.5",
