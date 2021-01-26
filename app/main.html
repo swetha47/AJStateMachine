@@ -1,0 +1,30 @@
+<div>
+  <table border="1px">
+    <thead>
+      <tr>
+        <th>Defect</th>
+        <th>Project</th>
+        <th>Comments</th>
+        <th>Resolved</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="defect in defects">
+        <td>{{defect.name}}</td>
+        <td>{{defect.project}}</td>
+        <td>{{defect.description}}</td>
+        <td>
+          <input type="checkbox" ng-click="resolved(defect.id)" />
+        </td>
+        <td>
+          <button type="button" ng-click="delete(defect.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+<button type="button" ng-click="addNewBug()">Add new defect</button>
+</div>
+<!--<a href="/" >Add new defect </a>
