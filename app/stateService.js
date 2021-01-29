@@ -1,5 +1,6 @@
 (function () {
-  state = [];
+  let state = [];
+
   var StateService = function () {
     function Actions() {
       return { ADD_BUG: "bugAdded", RESOLVED_BUG: "bugResolved" };
@@ -20,7 +21,6 @@
       if (!action) {
         return state;
       } else if (action.type === "bugAdded") {
-        console.log("In BugAdded");
         let newState = [
           ...state,
           {
