@@ -1,10 +1,13 @@
 (function () {
-  let state = [];
+  let state = {
+    defects: { items: [] },
+    user: {},
+  };
 
   var StateService = function () {
-    function Actions() {
+    /*function Actions() {
       return { ADD_BUG: "bugAdded", RESOLVED_BUG: "bugResolved" };
-    }
+    }*/
     function createStore() {
       Reducer();
     }
@@ -21,8 +24,8 @@
       if (!action) {
         return state;
       } else if (action.type === "bugAdded") {
-        let newState = [
-          ...state,
+        let defectItems = [
+          ...state.defects.items,
           {
             id: action.payload.id,
             name: action.payload.name,
@@ -31,15 +34,18 @@
             resolved: false,
           },
         ];
-        return newState;
-      } else if (action.type === "bugRemoved") {
-        return state.filter((bug) => bug.id !== action.payload.id);
-      } else if (action.type === "bugResolved") {
-        value = state.filter((bug) => bug.id === action.payload.id).resolved;
+        state.defects.items = defectItems;
 
-        return (state.filter(
-          (bug) => bug.id === action.payload.id
-        ).resolved = !value);
+        return state;
+      } else if (action.type === "bugRemoved") {
+        let items = state.defects.items.filter(
+          (bug) => bug.id != action.payload.id
+        );
+        state.defects.items = items;
+      } else if (action.type === "bugResolved") {
+        let defectItems = [...state.defects.items];
+        let item = defectItems.filter((bug) => bug.id === action.payload.id)[0];
+        item.resolved = !item.resolved;
       } else return state;
     }
 

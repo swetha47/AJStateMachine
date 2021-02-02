@@ -1,17 +1,19 @@
 var myApp = angular.module("myApp");
 
 myApp.controller("mainCtrl", function ($scope, bugTracker, StateService) {
-  //temp variable
   let bugId = 0;
-  $scope.defects = bugTracker.getBugs();
+  // $scope.defects = bugTracker.getBugs();
+  $scope.defects = StateService.getState().defects.items;
 
   $scope.delete = function (defectId) {
     StateService.dispatch(StateService.getState(), {
-      type: "bugDeleted",
+      type: "bugRemoved",
       payload: {
         id: defectId,
       },
     });
+    let def = StateService.getState();
+    $scope.defects = def.defects.items;
   };
 
   $scope.addNewBug = function () {
@@ -26,8 +28,8 @@ myApp.controller("mainCtrl", function ($scope, bugTracker, StateService) {
         description: "Descrption " + bugId,
       },
     });
-
-    console.log("State:" + store);
+    $scope.defects = StateService.getState().defects.items;
+    //console.log("State:" + store);
   };
 
   $scope.resolved = function (defectId) {
@@ -37,5 +39,6 @@ myApp.controller("mainCtrl", function ($scope, bugTracker, StateService) {
         id: defectId,
       },
     });
+    $scope.defects = StateService.getState().defects.items;
   };
 });
