@@ -1,44 +1,45 @@
 var myApp = angular.module("myApp");
 
-myApp.controller("mainCtrl", function ($scope, bugTracker, StateService) {
+myApp.controller("mainCtrl", function ($scope, StateService) {
+  //#region Declarations
   let bugId = 0;
-  // $scope.defects = bugTracker.getBugs();
-  $scope.defects = StateService.getState().defects.items;
+  let defectTracker = new DefectTracker();
+  //#endregion
 
-  $scope.delete = function (defectId) {
-    StateService.dispatch(StateService.getState(), {
-      type: "bugRemoved",
-      payload: {
-        id: defectId,
-      },
-    });
-    let def = StateService.getState();
-    $scope.defects = def.defects.items;
-  };
-
+  //#region Add, Delete and Resolve
+  /**
+   * The function is called when the user clicks the Add new defect button.
+   */
   $scope.addNewBug = function () {
     bugId = bugId + 1;
 
-    const store = StateService.dispatch(StateService.getState(), {
-      type: "bugAdded",
-      payload: {
-        id: bugId,
-        name: "Bug " + bugId,
-        project: "Project " + bugId,
-        description: "Descrption " + bugId,
-      },
-    });
-    $scope.defects = StateService.getState().defects.items;
-    //console.log("State:" + store);
+    defectTracker.addNewBug(
+      bugId,
+      "Bug " + bugId,
+      "Project " + bugId,
+      "Descrption " + bugId,
+      false
+    );
+    $scope.defects = defectTracker.state.defects.items;
   };
 
-  $scope.resolved = function (defectId) {
-    const store = StateService.dispatch(StateService.getState(), {
-      type: "bugResolved",
-      payload: {
-        id: defectId,
-      },
-    });
-    $scope.defects = StateService.getState().defects.items;
+  /**
+   * The function is called when the user clicks the delete button next to defect.
+   * The function receives a defectId from the view.
+   * @param {number} defectId
+   */
+  $scope.delete = function (defectId) {
+    defectTracker.deleteBug(defectId);
+    $scope.defects = defectTracker.state.defects.items;
   };
+  /**
+   * The function is called when the user checks/unchecks the Resolved checkbox.
+   * The function gets passed the defectId on which the checkbox is clicked.
+   * @param {number} defectId
+   */
+  $scope.resolved = function (defectId) {
+    defectTracker.resolveBug(defectId);
+    $scope.defects = defectTracker.state.defects.items;
+  };
+  //#endregion
 });

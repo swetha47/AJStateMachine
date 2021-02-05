@@ -5,9 +5,13 @@
   };
 
   var StateService = function () {
-    /*function Actions() {
-      return { ADD_BUG: "bugAdded", RESOLVED_BUG: "bugResolved" };
-    }*/
+    function Actions() {
+      return {
+        ADD_BUG: "bugAdded",
+        RESOLVED_BUG: "bugResolved",
+        DELETE_BUG: "bugRemoved",
+      };
+    }
     function createStore() {
       Reducer();
     }
@@ -23,7 +27,7 @@
     function Reducer(state = [], action) {
       if (!action) {
         return state;
-      } else if (action.type === "bugAdded") {
+      } else if (action.type === Actions.ADD_BUG) {
         let defectItems = [
           ...state.defects.items,
           {
@@ -37,12 +41,12 @@
         state.defects.items = defectItems;
 
         return state;
-      } else if (action.type === "bugRemoved") {
+      } else if (action.type === Actions.DELETE_BUG) {
         let items = state.defects.items.filter(
           (bug) => bug.id != action.payload.id
         );
         state.defects.items = items;
-      } else if (action.type === "bugResolved") {
+      } else if (action.type === Actions.RESOLVED_BUG) {
         let defectItems = [...state.defects.items];
         let item = defectItems.filter((bug) => bug.id === action.payload.id)[0];
         item.resolved = !item.resolved;
