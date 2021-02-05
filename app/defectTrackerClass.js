@@ -26,6 +26,7 @@ class DefectTracker {
 
   /**
    * Creates a new defect with the given information and add it to the state object.
+   * The functions auto generates the bugId.
    * @param {number} id
    * @param {string} name
    * @param {string} project
