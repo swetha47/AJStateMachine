@@ -11,16 +11,20 @@ myApp.controller("mainCtrl", function ($scope, StateService) {
    * The function is called when the user clicks the Add new defect button.
    */
   $scope.addNewBug = function () {
-    bugId = bugId + 1;
+    try {
+      bugId = bugId + 1;
 
-    defectTracker.addNewBug(
-      bugId,
-      "Bug " + bugId,
-      "Project " + bugId,
-      "Descrption " + bugId,
-      false
-    );
-    $scope.defects = defectTracker.state.defects.items;
+      defectTracker.addNewBug(
+        bugId,
+        "Bug " + bugId,
+        "Project " + bugId,
+        "Descrption " + bugId,
+        false
+      );
+      $scope.defects = defectTracker.state.defects.items;
+    } catch (err) {
+      $scope.error = err;
+    }
   };
 
   /**
@@ -29,8 +33,12 @@ myApp.controller("mainCtrl", function ($scope, StateService) {
    * @param {number} defectId
    */
   $scope.delete = function (defectId) {
-    defectTracker.deleteBug(defectId);
-    $scope.defects = defectTracker.state.defects.items;
+    try {
+      defectTracker.deleteBug(defectId);
+      $scope.defects = defectTracker.state.defects.items;
+    } catch (err) {
+      $scope.error = err;
+    }
   };
   /**
    * The function is called when the user checks/unchecks the Resolved checkbox.
@@ -38,8 +46,12 @@ myApp.controller("mainCtrl", function ($scope, StateService) {
    * @param {number} defectId
    */
   $scope.resolved = function (defectId) {
-    defectTracker.resolveBug(defectId);
-    $scope.defects = defectTracker.state.defects.items;
+    try {
+      defectTracker.resolveBug(defectId);
+      $scope.defects = defectTracker.state.defects.items;
+    } catch (err) {
+      $scope.error = err;
+    }
   };
   //#endregion
 });
