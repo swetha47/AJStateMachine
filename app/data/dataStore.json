@@ -1,0 +1,46 @@
+{
+  "defects": [
+    {
+      "name": "Bug 5",
+      "project": "Project 5",
+      "description": "Description 5",
+      "resolved": false,
+      "id": 5
+    },
+    {
+      "name": "Bug 4",
+      "project": "Project 4",
+      "description": "Description 4",
+      "resolved": true,
+      "id": 4
+    },
+    {
+      "name": "Bug 1",
+      "project": "Project 1",
+      "description": "Description 1",
+      "resolved": true,
+      "id": 1
+    },
+    {
+      "name": "Bug 2",
+      "project": "Project 2",
+      "description": "Description 2",
+      "resolved": false,
+      "id": 2
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "role": "developer",
+      "name": "user1",
+      "department": "IT"
+    },
+    {
+      "id": 2,
+      "role": "tester",
+      "name": "user2",
+      "department": "IT"
+    }
+  ]
+}

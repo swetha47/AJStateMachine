@@ -3,12 +3,15 @@
  */
 class DefectTracker {
   state = {};
+
   constructor() {
     this.state = {
       defects: { items: [] },
       user: {},
     };
   }
+
+  //#region Properties
   /**
    * Property retrieves the state object.
    */
@@ -21,6 +24,7 @@ class DefectTracker {
   get user() {
     return this.state.user;
   }
+  //#endregion
 
   //#region Add Resolve and Delete functions for defect items
 

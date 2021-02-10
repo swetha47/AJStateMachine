@@ -7,12 +7,14 @@ angular
     "$locationProvider",
     "$routeProvider",
     function ($locationProvider, $routeProvider) {
-      //$locationProvider.hashPrefix("!");
-
       $routeProvider
         .when("/main", {
           templateUrl: "/main",
           controller: "mainCtrl",
+        })
+        .when("/create", {
+          templateUrl: "/create",
+          controller: "createCtrl",
         })
         .otherwise({ redirectTo: "/main" });
     },
